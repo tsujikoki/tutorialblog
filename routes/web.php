@@ -11,6 +11,13 @@
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+// Route::get('/', function () {
+//     return view('welcome');
+// });
+Route::get('/', 'PostsController@index')->name('top');
+Route::resource('/posts', 'PostsController');
+// Route::resource('/{id}', 'PostsController@show');
+
+Auth::routes();
+
+Route::get('/home', 'HomeController@index')->name('home');
