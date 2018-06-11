@@ -4,16 +4,25 @@
 
 @section('content')
 
-{{-- {{ Form::open(['route' => 'posts.show']) }}
-    {{ Form::text('title', $post->title) }}
-    {{ Form::submit('Search') }}
-{{ Form::close() }} --}}
 
+{{ Form::open(['route' => 'posts.index', 'method' => 'get']) }}
+    Keywords:{{ Form::text('keywords') }}
+    {{ Form::submit('Search') }}
+{{ Form::close() }}
+<br>
+{{ Form::open(['route' => 'posts.index', 'method' => 'get']) }}
+    FromDate:{{ Form::text('fromdate') }}
+    ToDate:{{ Form::text('todate') }}
+    {{ Form::submit('Search') }}
+{{ Form::close() }}
+
+{{-- 削除実行時表示 --}}
 @if(session()->has('dmessage'))
     <div class="alert alert-info mb-3">
-        {{session('dmessage')}}
+        {{ session('dmessage') }}
     </div>
 @endif
+<br>
 
 <table>
 <tr>
@@ -39,9 +48,8 @@
 @endforeach
 </table>
 @if(Auth::check())
-    <a href = "{{ action('PostsController@create') }}">new post</a>
-    {{-- {{ Form::open(['route' => 'posts.create']) }}
-        { Form::submit('new post') }}
-    {{ Form::close() }} --}}
+    {{ link_to_route('posts.create', 'new post') }}
 @endif
+
+{{ $posts->appends(request()->input())->links() }}
 @endsection

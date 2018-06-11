@@ -18,6 +18,7 @@
     {{ Form::submit('create') }}
 {{ Form::close() }}
 
+{{-- エラーメッセージを表示 --}}
 @if ($errors->any())
     <div class="alert alert-danger">
         <ul>

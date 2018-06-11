@@ -17,7 +17,9 @@
 Route::get('/', 'PostsController@index')->name('top');
 Route::resource('/posts', 'PostsController');
 // Route::resource('/{id}', 'PostsController@show');
-
+//Route::post('/login', 'Auth\LoginController@authenticate');
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
+Route::Post('/comment', 'PostsController@comment');
+
